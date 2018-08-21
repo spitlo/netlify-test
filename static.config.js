@@ -1,13 +1,22 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 import { ServerStyleSheet } from 'styled-components'
+import { createClient } from 'contentful'
+
+const config = {
+  space: process.env.CTF_SPACE_ID,
+  accessToken: process.env.CTF_CDA_ACCESS_TOKEN,
+}
+const ctfClient = createClient(config)
 
 export default {
   getSiteData: () => ({
-    title: 'React Static',
+    title: 'Netlify Test',
   }),
   getRoutes: async () => {
-    const { data: posts } = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    const { items: products } = await ctfClient.getEntries({
+      content_type: '2PqfXUJwE8qSYKuM0U6w8M',
+    })
+
     return [
       {
         path: '/',
@@ -18,16 +27,16 @@ export default {
         component: 'src/containers/About',
       },
       {
-        path: '/blog',
-        component: 'src/containers/Blog',
+        path: '/products',
+        component: 'src/containers/Products',
         getData: () => ({
-          posts,
+          products,
         }),
-        children: posts.map(post => ({
-          path: `/post/${post.id}`,
-          component: 'src/containers/Post',
+        children: products.map(({ fields: product }) => ({
+          path: `/${product.slug}`,
+          component: 'src/containers/Product',
           getData: () => ({
-            post,
+            product,
           }),
         })),
       },
