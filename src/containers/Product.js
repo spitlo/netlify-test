@@ -8,13 +8,9 @@ export default withRouteData(({ product }) => {
     <div>
       <Link to="/products/">{'<'} Back</Link>
       <br />
-      {product.image ? product.image.map(({ fields: image }) => {
-        return (
-          <div>
-            <Image key={image.file.fileName} src={image.file.url} image={image}/>
-          </div>
-        )
-      }) : null}
+      {product.image ? product.image.map(({ fields: image }) => (
+        <Image key={image.file.fileName} src={image.file.url} image={image}/>
+      )) : null}
       <h3>{product.productName}</h3>
       <p>{product.productDescription}</p>
       <Brand brand={product.brand} />
