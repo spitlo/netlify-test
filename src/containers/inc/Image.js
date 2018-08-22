@@ -25,9 +25,7 @@ const noOp = () => {}
 
 const Img = props => {
   const { opacity, onLoad, transitionDelay, image, ...otherProps } = props
-  console.log('image:', image);
   const { file: { details } } = image
-  console.log(details);
   return (
     <ImageContainer width={details.image.width} height={details.image.height}>
       <StyledImg
