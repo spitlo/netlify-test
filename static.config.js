@@ -1,3 +1,5 @@
+import _ from './env'
+
 import React, { Component } from 'react'
 import { ServerStyleSheet } from 'styled-components'
 import { createClient } from 'contentful'
