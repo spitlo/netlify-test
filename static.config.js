@@ -11,6 +11,7 @@ const config = {
 const ctfClient = createClient(config)
 
 export default {
+  siteRoot: 'https://hungry-franklin-89e766.netlify.com/',
   getSiteData: () => ({
     title: 'Netlify Test',
   }),
